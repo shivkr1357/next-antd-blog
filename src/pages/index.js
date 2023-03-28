@@ -29,14 +29,22 @@ export default function Home() {
             console.log(err);
           });
 
-        console.log(data);
+        console.log(blog);
       }
       if (process.env.NEXT_PUBLIC_NODE_ENV === "production") {
-        const data = await fetch(
-          `${process.env.NEXT_PUBLIC_API_DOMAIN}/api/blog`
-        );
+        const data = await axios
+          .get(`${process.env.NEXT_PUBLIC_API_URL}/api/blog`)
+          .then((res) => {
+            console.log(res.data);
 
-        console.log(data);
+            setBlog(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        console.log("Blog", blog);
+        console.log("data", data);
       }
     };
 
