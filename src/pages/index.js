@@ -15,6 +15,7 @@ export default function Home() {
   };
 
   React.useEffect(() => {
+    console.log("Here in useEffect");
     const getAllBlogs = async () => {
       if (process.env.NEXT_PUBLIC_NODE_ENV === "dev") {
         const data = await axios
