@@ -46,6 +46,22 @@ export default function Home() {
         console.log("Blog", blog);
         console.log("data", data);
       }
+
+      if (process.env.NODE_ENV === "production") {
+        const data = await axios
+          .get(`${process.env.NEXT_PUBLIC_API_URL}/api/blog`)
+          .then((res) => {
+            console.log(res.data);
+
+            setBlog(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        console.log("Blog", blog);
+        console.log("data", data);
+      }
     };
 
     getAllBlogs();
