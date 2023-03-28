@@ -4,7 +4,7 @@ import { Button, Form, Input } from "antd";
 import axios from "axios";
 // import TextArea from "antd/es/input/TextArea";
 
-export default function Home() {
+export default function Home({ blogList }) {
   const [title, setTitle] = React.useState("");
   const [desc, setDesc] = React.useState("");
 
@@ -13,6 +13,8 @@ export default function Home() {
   const handleSubmit = () => {
     console.log(title, desc);
   };
+
+  console.log("Blog from SSR", blogList);
 
   React.useEffect(() => {
     console.log("Here in useEffect");
@@ -125,3 +127,23 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = async () => {
+  let blog = [];
+  const data = await axios
+    .get(`https://next-antd-blog.vercel.app/api/blog`)
+    .then((res) => {
+      console.log(res.data);
+
+      blog = res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return {
+    props: {
+      blogList: JSON.parse(JSON.stringify(blog)),
+    },
+  };
+};
