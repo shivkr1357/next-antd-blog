@@ -33,7 +33,7 @@ export default function Home() {
       }
       if (process.env.NEXT_PUBLIC_NODE_ENV === "production") {
         const data = await axios
-          .get(`${process.env.NEXT_PUBLIC_API_URL}/api/blog`)
+          .get(`${process.env.NEXT_PUBLIC_API_DOMAIN}/api/blog`)
           .then((res) => {
             console.log(res.data);
 
@@ -49,7 +49,7 @@ export default function Home() {
 
       if (process.env.NODE_ENV === "production") {
         const data = await axios
-          .get(`${process.env.NEXT_PUBLIC_API_URL}/api/blog`)
+          .get(`${process.env.NEXT_PUBLIC_API_DOMAIN}/api/blog`)
           .then((res) => {
             console.log(res.data);
 
